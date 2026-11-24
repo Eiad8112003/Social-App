@@ -1,0 +1,456 @@
+<div
+  [ngClass]="themeService.isDarkMode() ? 'bg-[#070611] text-slate-100' : 'bg-slate-100 text-slate-800'"
+  class="min-h-screen w-full flex flex-col justify-between p-4 sm:p-6 lg:p-8 font-sans selection:bg-purple-600 selection:text-white relative overflow-hidden transition-colors duration-300"
+>
+  <!-- Ambient background glow spheres -->
+  <div
+    [ngClass]="themeService.isDarkMode() ? 'bg-purple-900/20' : 'bg-purple-300/30'"
+    class="absolute -top-40 -left-40 w-[30rem] h-[30rem] rounded-full blur-3xl pointer-events-none transition-colors duration-300"
+  ></div>
+  <div
+    [ngClass]="themeService.isDarkMode() ? 'bg-indigo-900/20' : 'bg-indigo-300/30'"
+    class="absolute -bottom-40 -right-40 w-[30rem] h-[30rem] rounded-full blur-3xl pointer-events-none transition-colors duration-300"
+  ></div>
+
+  <div class="max-w-6xl w-full mx-auto flex-1 flex flex-col justify-center my-auto py-6">
+    <!-- Main Glassmorphism Card Container -->
+    <div
+      [ngClass]="
+        themeService.isDarkMode()
+          ? 'bg-[#0a0817] border-white/10 shadow-purple-950/30'
+          : 'bg-white border-slate-200/80 shadow-2xl shadow-slate-300/60'
+      "
+      class="w-full grid grid-cols-1 lg:grid-cols-12 rounded-3xl border shadow-2xl overflow-hidden relative z-10 transition-colors duration-300"
+    >
+      <!-- LEFT HERO PANEL -->
+      <div
+        class="lg:col-span-6 relative min-h-[500px] lg:min-h-[660px] flex flex-col justify-between p-6 sm:p-10 lg:p-12 overflow-hidden bg-cover bg-center"
+        style="background-image: url('assets/cover_space.png')"
+      >
+        <!-- Overlay for high contrast & dark theme aesthetic -->
+        <div
+          class="absolute inset-0 bg-gradient-to-t from-[#0a0817] via-[#0a0817]/75 to-[#0a0817]/40"
+        ></div>
+
+        <!-- Brand Header -->
+        <div class="relative z-10 flex items-center justify-between">
+          <div class="flex items-center gap-3">
+            <div
+              class="w-10 h-10 rounded-xl bg-gradient-to-tr from-blue-600 via-indigo-600 to-purple-600 flex items-center justify-center font-black text-white text-xl shadow-lg shadow-purple-600/30"
+            >
+              R
+            </div>
+            <div>
+              <h1 class="text-white font-bold text-lg tracking-tight leading-none">Route Posts</h1>
+              <p class="text-slate-400 text-[11px] font-normal tracking-wide mt-0.5">
+                Connect. Share. Inspire.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Center Copy & Feature List -->
+        <div class="relative z-10 my-auto py-6 space-y-6 max-w-md">
+          <h2
+            class="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white leading-tight flex items-center gap-2"
+          >
+            Welcome <br />
+            Back! 👋
+          </h2>
+          <p class="text-slate-300 text-xs sm:text-sm leading-relaxed font-normal">
+            Sign in to continue your journey and stay connected with your world.
+          </p>
+
+          <!-- Feature Item Cards -->
+          <div class="space-y-4 pt-2">
+            <!-- Feature 1 -->
+            <div class="flex items-start gap-3.5 group">
+              <div
+                class="w-10 h-10 rounded-2xl bg-purple-950/70 border border-purple-500/20 flex items-center justify-center text-purple-400 text-sm shrink-0 shadow-inner group-hover:scale-105 group-hover:border-purple-400/50 transition-all"
+              >
+                <i class="fa-solid fa-user-group"></i>
+              </div>
+              <div>
+                <h3 class="text-sm font-semibold text-white group-hover:text-purple-300 transition-colors">
+                  Stay Connected
+                </h3>
+                <p class="text-xs text-slate-400">
+                  Follow your friends and favorite creators.
+                </p>
+              </div>
+            </div>
+
+            <!-- Feature 2 -->
+            <div class="flex items-start gap-3.5 group">
+              <div
+                class="w-10 h-10 rounded-2xl bg-purple-950/70 border border-purple-500/20 flex items-center justify-center text-purple-400 text-sm shrink-0 shadow-inner group-hover:scale-105 group-hover:border-purple-400/50 transition-all"
+              >
+                <i class="fa-solid fa-bolt"></i>
+              </div>
+              <div>
+                <h3 class="text-sm font-semibold text-white group-hover:text-purple-300 transition-colors">
+                  Discover More
+                </h3>
+                <p class="text-xs text-slate-400">
+                  Explore trending posts and communities.
+                </p>
+              </div>
+            </div>
+
+            <!-- Feature 3 -->
+            <div class="flex items-start gap-3.5 group">
+              <div
+                class="w-10 h-10 rounded-2xl bg-purple-950/70 border border-purple-500/20 flex items-center justify-center text-purple-400 text-sm shrink-0 shadow-inner group-hover:scale-105 group-hover:border-purple-400/50 transition-all"
+              >
+                <i class="fa-solid fa-shield-halved"></i>
+              </div>
+              <div>
+                <h3 class="text-sm font-semibold text-white group-hover:text-purple-300 transition-colors">
+                  Your Privacy
+                </h3>
+                <p class="text-xs text-slate-400">
+                  We keep your data safe and secure.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bottom Quote Card -->
+        <div class="relative z-10 pt-2">
+          <div
+            class="bg-[#141126]/85 backdrop-blur-md border border-purple-500/20 rounded-2xl p-4 max-w-xs shadow-xl flex items-center gap-3"
+          >
+            <div class="flex -space-x-2 overflow-hidden">
+              <img class="inline-block h-8 w-8 rounded-full ring-2 ring-purple-900" src="assets/avatar_ahmed.png" alt="" />
+              <img class="inline-block h-8 w-8 rounded-full ring-2 ring-purple-900" src="assets/avatar_sara.png" alt="" />
+              <img class="inline-block h-8 w-8 rounded-full ring-2 ring-purple-900" src="assets/avatar_omar.png" alt="" />
+            </div>
+            <div>
+              <p class="text-xs font-bold text-white">12K+</p>
+              <p class="text-[10px] text-slate-400">Active members today</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT LOGIN FORM PANEL -->
+      <div
+        [ngClass]="themeService.isDarkMode() ? 'bg-[#0e0c1c] border-white/5' : 'bg-white border-slate-100'"
+        class="lg:col-span-6 p-6 sm:p-10 lg:p-12 flex flex-col justify-between border-t lg:border-t-0 lg:border-l transition-colors duration-300"
+      >
+        <!-- Form Header -->
+        <div class="mb-8">
+          <h2
+            [ngClass]="themeService.isDarkMode() ? 'text-white' : 'text-slate-900'"
+            class="text-2xl sm:text-3xl font-bold tracking-tight transition-colors duration-300"
+          >
+            Login to your account
+          </h2>
+          <p
+            [ngClass]="themeService.isDarkMode() ? 'text-slate-400' : 'text-slate-500'"
+            class="text-xs sm:text-sm mt-1 font-normal transition-colors duration-300"
+          >
+            Welcome back! Please enter your details.
+          </p>
+        </div>
+
+        <!-- Form Body -->
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="space-y-4">
+          <!-- Error Alert Banner -->
+          <div
+            *ngIf="errorMessage"
+            class="p-3.5 rounded-xl bg-red-500/10 border border-red-500/30 text-red-500 flex items-center justify-between text-xs sm:text-sm animate-fade-in"
+          >
+            <div class="flex items-center gap-2.5">
+              <i class="fa-solid fa-circle-exclamation text-base shrink-0"></i>
+              <span>{{ errorMessage }}</span>
+            </div>
+            <button
+              type="button"
+              (click)="errorMessage = ''"
+              class="text-red-400 hover:text-red-300 p-1 transition cursor-pointer"
+            >
+              <i class="fa-solid fa-xmark text-sm"></i>
+            </button>
+          </div>
+
+          <!-- Email or Username -->
+          <div>
+            <div
+              [ngClass]="
+                isFieldInvalid('emailOrUsername')
+                  ? 'border-red-500 focus-within:border-red-500 focus-within:ring-red-500/40 bg-red-500/5'
+                  : themeService.isDarkMode()
+                    ? 'bg-[#151228] border-white/10 focus-within:border-purple-500/80 focus-within:ring-purple-500/40'
+                    : 'bg-slate-50 border-slate-200 focus-within:bg-white focus-within:border-purple-600'
+              "
+              class="border rounded-xl px-4 py-2.5 transition-all group"
+            >
+              <label
+                [ngClass]="
+                  isFieldInvalid('emailOrUsername')
+                    ? 'text-red-400'
+                    : themeService.isDarkMode()
+                      ? 'text-slate-400 group-focus-within:text-purple-300'
+                      : 'text-slate-500 group-focus-within:text-purple-600'
+                "
+                class="block text-[11px] font-semibold transition-colors mb-1"
+              >
+                Email or Username
+              </label>
+              <div class="flex items-center gap-3">
+                <i
+                  [ngClass]="
+                    isFieldInvalid('emailOrUsername')
+                      ? 'text-red-400'
+                      : themeService.isDarkMode()
+                        ? 'text-slate-400 group-focus-within:text-purple-400'
+                        : 'text-slate-400 group-focus-within:text-purple-600'
+                  "
+                  class="fa-regular fa-user text-sm transition-colors"
+                ></i>
+                <input
+                  type="text"
+                  formControlName="emailOrUsername"
+                  (input)="clearError()"
+                  placeholder="Enter your email or username"
+                  [ngClass]="
+                    themeService.isDarkMode()
+                      ? 'text-slate-100 placeholder:text-slate-600'
+                      : 'text-slate-800 placeholder:text-slate-400'
+                  "
+                  class="w-full bg-transparent border-none text-sm focus:outline-none p-0 font-medium"
+                />
+              </div>
+            </div>
+            <p *ngIf="isFieldInvalid('emailOrUsername')" class="text-red-400 text-xs mt-1 font-medium flex items-center gap-1.5 px-1">
+              <i class="fa-solid fa-circle-info text-[11px]"></i>
+              <span>{{ getFieldError('emailOrUsername') }}</span>
+            </p>
+          </div>
+
+          <!-- Password -->
+          <div>
+            <div
+              [ngClass]="
+                isFieldInvalid('password')
+                  ? 'border-red-500 focus-within:border-red-500 focus-within:ring-red-500/40 bg-red-500/5'
+                  : themeService.isDarkMode()
+                    ? 'bg-[#151228] border-white/10 focus-within:border-purple-500/80 focus-within:ring-purple-500/40'
+                    : 'bg-slate-50 border-slate-200 focus-within:bg-white focus-within:border-purple-600'
+              "
+              class="border rounded-xl px-4 py-2.5 transition-all group"
+            >
+              <label
+                [ngClass]="
+                  isFieldInvalid('password')
+                    ? 'text-red-400'
+                    : themeService.isDarkMode()
+                      ? 'text-slate-400 group-focus-within:text-purple-300'
+                      : 'text-slate-500 group-focus-within:text-purple-600'
+                "
+                class="block text-[11px] font-semibold transition-colors mb-1"
+              >
+                Password
+              </label>
+              <div class="flex items-center justify-between gap-3">
+                <div class="flex items-center gap-3 w-full">
+                  <i
+                    [ngClass]="
+                      isFieldInvalid('password')
+                        ? 'text-red-400'
+                        : themeService.isDarkMode()
+                          ? 'text-slate-400 group-focus-within:text-purple-400'
+                          : 'text-slate-400 group-focus-within:text-purple-600'
+                    "
+                    class="fa-solid fa-lock text-sm transition-colors"
+                  ></i>
+                  <input
+                    [type]="showPassword ? 'text' : 'password'"
+                    formControlName="password"
+                    (input)="clearError()"
+                    placeholder="Enter your password"
+                    [ngClass]="
+                      themeService.isDarkMode()
+                        ? 'text-slate-100 placeholder:text-slate-600'
+                        : 'text-slate-800 placeholder:text-slate-400'
+                    "
+                    class="w-full bg-transparent border-none text-sm focus:outline-none p-0 font-medium"
+                  />
+                </div>
+                <button
+                  type="button"
+                  (click)="togglePassword()"
+                  [ngClass]="themeService.isDarkMode() ? 'text-slate-400 hover:text-slate-200' : 'text-slate-400 hover:text-slate-700'"
+                  class="transition cursor-pointer"
+                >
+                  <i [class]="showPassword ? 'fa-regular fa-eye-slash text-sm' : 'fa-regular fa-eye text-sm'"></i>
+                </button>
+              </div>
+            </div>
+            <p *ngIf="isFieldInvalid('password')" class="text-red-400 text-xs mt-1 font-medium flex items-center gap-1.5 px-1">
+              <i class="fa-solid fa-circle-info text-[11px]"></i>
+              <span>{{ getFieldError('password') }}</span>
+            </p>
+          </div>
+
+          <!-- Controls: Remember Me & Forgot Password -->
+          <div class="flex items-center justify-between text-xs pt-1">
+            <label class="flex items-center gap-2 cursor-pointer select-none">
+              <input
+                type="checkbox"
+                formControlName="rememberMe"
+                class="w-4 h-4 rounded text-purple-600 focus:ring-purple-500 accent-purple-600 cursor-pointer"
+              />
+              <span [ngClass]="themeService.isDarkMode() ? 'text-slate-300' : 'text-slate-600'">Remember me</span>
+            </label>
+            <a
+              routerLink="/auth/forgot-password"
+              class="text-purple-400 hover:text-purple-300 font-semibold transition-colors"
+            >
+              Forgot password?
+            </a>
+          </div>
+
+          <!-- Submit Button -->
+          <button
+            type="submit"
+            [disabled]="isSubmitting"
+            class="w-full py-3.5 px-6 mt-3 bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 hover:from-blue-500 hover:via-indigo-500 hover:to-purple-500 text-white font-semibold text-sm rounded-xl shadow-lg shadow-purple-600/30 transition-all duration-200 flex items-center justify-center gap-2 group cursor-pointer"
+          >
+            <span>{{ isSubmitting ? 'Signing in...' : 'Login' }}</span>
+            <i class="fa-solid fa-arrow-right text-xs group-hover:translate-x-1 transition-transform"></i>
+          </button>
+        </form>
+
+        <!-- Social OAuth Divider -->
+        <div class="relative my-6 text-center">
+          <div class="absolute inset-0 flex items-center">
+            <div
+              [ngClass]="themeService.isDarkMode() ? 'border-white/10' : 'border-slate-200'"
+              class="w-full border-t"
+            ></div>
+          </div>
+          <span
+            [ngClass]="
+              themeService.isDarkMode()
+                ? 'bg-[#0e0c1c] text-slate-500'
+                : 'bg-white text-slate-400'
+            "
+            class="relative px-4 text-xs font-normal"
+          >
+            or continue with
+          </span>
+        </div>
+
+        <!-- Social Login Buttons Grid -->
+        <div class="grid grid-cols-3 gap-3">
+          <!-- Google -->
+          <button
+            type="button"
+            (click)="onSocialLogin('Google')"
+            [ngClass]="
+              themeService.isDarkMode()
+                ? 'bg-[#151228] border-white/10 hover:border-purple-500/40 text-slate-200'
+                : 'bg-slate-50 border-slate-200 hover:bg-slate-100 text-slate-700'
+            "
+            class="py-2.5 rounded-xl border flex flex-col items-center justify-center gap-1.5 transition-all text-xs font-medium cursor-pointer"
+          >
+            <i class="fa-brands fa-google text-base text-red-500"></i>
+            <span>Google</span>
+          </button>
+
+          <!-- Apple -->
+          <button
+            type="button"
+            (click)="onSocialLogin('Apple')"
+            [ngClass]="
+              themeService.isDarkMode()
+                ? 'bg-[#151228] border-white/10 hover:border-purple-500/40 text-slate-200'
+                : 'bg-slate-50 border-slate-200 hover:bg-slate-100 text-slate-700'
+            "
+            class="py-2.5 rounded-xl border flex flex-col items-center justify-center gap-1.5 transition-all text-xs font-medium cursor-pointer"
+          >
+            <i class="fa-brands fa-apple text-base"></i>
+            <span>Apple</span>
+          </button>
+
+          <!-- Facebook -->
+          <button
+            type="button"
+            (click)="onSocialLogin('Facebook')"
+            [ngClass]="
+              themeService.isDarkMode()
+                ? 'bg-[#151228] border-white/10 hover:border-purple-500/40 text-slate-200'
+                : 'bg-slate-50 border-slate-200 hover:bg-slate-100 text-slate-700'
+            "
+            class="py-2.5 rounded-xl border flex flex-col items-center justify-center gap-1.5 transition-all text-xs font-medium cursor-pointer"
+          >
+            <i class="fa-brands fa-facebook text-base text-blue-500"></i>
+            <span>Facebook</span>
+          </button>
+        </div>
+
+        <!-- Footer Sign Up Link -->
+        <div
+          [ngClass]="themeService.isDarkMode() ? 'text-slate-400' : 'text-slate-500'"
+          class="text-center text-xs mt-8 transition-colors"
+        >
+          Don't have an account?
+          <a
+            routerLink="/auth/register"
+            class="text-purple-400 hover:text-purple-300 font-semibold ml-1 hover:underline"
+          >
+            Sign up
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom Feature Info Badges (Image 1) -->
+  <div class="max-w-5xl w-full mx-auto grid grid-cols-1 md:grid-cols-3 gap-6 py-6 border-t" [ngClass]="themeService.isDarkMode() ? 'border-white/10 text-slate-300' : 'border-slate-200 text-slate-700'">
+    <!-- Item 1 -->
+    <div class="flex items-center gap-3">
+      <div class="w-9 h-9 rounded-xl bg-purple-600/20 text-purple-400 flex items-center justify-center shrink-0">
+        <i class="fa-solid fa-shield-halved text-sm"></i>
+      </div>
+      <div>
+        <h4 class="text-xs font-bold">Secure & Private</h4>
+        <p class="text-[11px] text-slate-400 leading-tight">Your data is protected with end-to-end encryption.</p>
+      </div>
+    </div>
+
+    <!-- Item 2 -->
+    <div class="flex items-center gap-3">
+      <div class="w-9 h-9 rounded-xl bg-indigo-600/20 text-indigo-400 flex items-center justify-center shrink-0">
+        <i class="fa-solid fa-lock text-sm"></i>
+      </div>
+      <div>
+        <h4 class="text-xs font-bold">Trusted by Millions</h4>
+        <p class="text-[11px] text-slate-400 leading-tight">Join millions of users worldwide.</p>
+      </div>
+    </div>
+
+    <!-- Item 3 -->
+    <div class="flex items-center gap-3">
+      <div class="w-9 h-9 rounded-xl bg-blue-600/20 text-blue-400 flex items-center justify-center shrink-0">
+        <i class="fa-solid fa-globe text-sm"></i>
+      </div>
+      <div>
+        <h4 class="text-xs font-bold">Available Everywhere</h4>
+        <p class="text-[11px] text-slate-400 leading-tight">Use Route Posts on any device, anytime, anywhere.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Copyright & Theme Footer -->
+  <footer class="max-w-6xl w-full mx-auto flex items-center justify-between text-xs text-slate-500 pt-2 border-t" [ngClass]="themeService.isDarkMode() ? 'border-white/10' : 'border-slate-200'">
+    <div>© 2025 Route Posts. All rights reserved. | <a href="#" class="hover:underline">Privacy Policy</a> | <a href="#" class="hover:underline">Terms of Service</a></div>
+    <button (click)="toggleDarkMode()" class="flex items-center gap-2 hover:text-slate-300 transition-colors">
+      <i [class]="themeService.isDarkMode() ? 'fa-regular fa-moon text-purple-400' : 'fa-regular fa-sun text-amber-500'"></i>
+      <span>{{ themeService.isDarkMode() ? 'Dark Mode' : 'Light Mode' }}</span>
+    </button>
+  </footer>
+</div>

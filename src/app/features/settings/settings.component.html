@@ -1,0 +1,356 @@
+<div class="max-w-5xl mx-auto space-y-6">
+  <!-- Hidden File Input for Avatar Upload -->
+  <input type="file" #photoInput (change)="onFileSelected($event)" accept="image/*" class="hidden" />
+
+  <!-- SETTINGS HEADER CARD -->
+  <div
+    [ngClass]="
+      themeService.isDarkMode()
+        ? 'bg-[#0a0817] border-white/10'
+        : 'bg-white border-slate-200 shadow-sm'
+    "
+    class="p-6 sm:p-8 rounded-3xl border transition-colors flex items-center justify-between flex-wrap gap-4"
+  >
+    <div class="flex items-center gap-4">
+      <div class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-purple-600 to-indigo-600 flex items-center justify-center text-white text-xl shadow-lg shadow-purple-600/30">
+        <i class="fa-solid fa-gear"></i>
+      </div>
+      <div>
+        <h1 [ngClass]="themeService.isDarkMode() ? 'text-white' : 'text-slate-900'" class="text-2xl font-bold tracking-tight">
+          Settings & Preferences
+        </h1>
+        <p class="text-xs text-slate-400 mt-0.5 font-normal">
+          Manage your account credentials, security options, and theme preferences.
+        </p>
+      </div>
+    </div>
+
+    <button
+      (click)="logout()"
+      class="px-4 py-2 rounded-xl bg-red-500/10 hover:bg-red-500/20 text-red-400 border border-red-500/20 text-xs font-semibold transition-all cursor-pointer flex items-center gap-2"
+    >
+      <i class="fa-solid fa-right-from-bracket"></i>
+      <span>Log Out</span>
+    </button>
+  </div>
+
+  <!-- MAIN SETTINGS CONTAINER GRID -->
+  <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+    <!-- LEFT NAVIGATION TABS SIDEBAR -->
+    <div class="lg:col-span-4">
+      <div
+        [ngClass]="
+          themeService.isDarkMode()
+            ? 'bg-[#0a0817] border-white/10'
+            : 'bg-white border-slate-200 shadow-sm'
+        "
+        class="p-3 sm:p-4 rounded-3xl border transition-colors space-y-1.5"
+      >
+        <button
+          (click)="setTab('account')"
+          [ngClass]="
+            activeTab === 'account'
+              ? 'bg-purple-600 text-white shadow-md shadow-purple-600/30'
+              : themeService.isDarkMode()
+                ? 'text-slate-300 hover:bg-white/5'
+                : 'text-slate-700 hover:bg-slate-100'
+          "
+          class="w-full px-4 py-3 rounded-2xl text-xs sm:text-sm font-semibold transition-all flex items-center gap-3 cursor-pointer text-left"
+        >
+          <i class="fa-regular fa-user text-base"></i>
+          <span>Account & Profile</span>
+        </button>
+
+        <button
+          (click)="setTab('security')"
+          [ngClass]="
+            activeTab === 'security'
+              ? 'bg-purple-600 text-white shadow-md shadow-purple-600/30'
+              : themeService.isDarkMode()
+                ? 'text-slate-300 hover:bg-white/5'
+                : 'text-slate-700 hover:bg-slate-100'
+          "
+          class="w-full px-4 py-3 rounded-2xl text-xs sm:text-sm font-semibold transition-all flex items-center gap-3 cursor-pointer text-left"
+        >
+          <i class="fa-solid fa-lock text-base"></i>
+          <span>Security & Password</span>
+        </button>
+
+        <button
+          (click)="setTab('appearance')"
+          [ngClass]="
+            activeTab === 'appearance'
+              ? 'bg-purple-600 text-white shadow-md shadow-purple-600/30'
+              : themeService.isDarkMode()
+                ? 'text-slate-300 hover:bg-white/5'
+                : 'text-slate-700 hover:bg-slate-100'
+          "
+          class="w-full px-4 py-3 rounded-2xl text-xs sm:text-sm font-semibold transition-all flex items-center gap-3 cursor-pointer text-left"
+        >
+          <i class="fa-solid fa-palette text-base"></i>
+          <span>Appearance & Theme</span>
+        </button>
+
+        <button
+          (click)="setTab('notifications')"
+          [ngClass]="
+            activeTab === 'notifications'
+              ? 'bg-purple-600 text-white shadow-md shadow-purple-600/30'
+              : themeService.isDarkMode()
+                ? 'text-slate-300 hover:bg-white/5'
+                : 'text-slate-700 hover:bg-slate-100'
+          "
+          class="w-full px-4 py-3 rounded-2xl text-xs sm:text-sm font-semibold transition-all flex items-center gap-3 cursor-pointer text-left"
+        >
+          <i class="fa-regular fa-bell text-base"></i>
+          <span>Notifications</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- RIGHT CONTENT PANEL -->
+    <div class="lg:col-span-8">
+      <div
+        [ngClass]="
+          themeService.isDarkMode()
+            ? 'bg-[#0a0817] border-white/10'
+            : 'bg-white border-slate-200 shadow-sm'
+        "
+        class="p-6 sm:p-8 rounded-3xl border transition-colors space-y-6"
+      >
+        <!-- TAB 1: ACCOUNT & PROFILE -->
+        <div *ngIf="activeTab === 'account'" class="space-y-6 animate-fade-in">
+          <div>
+            <h2 [ngClass]="themeService.isDarkMode() ? 'text-white' : 'text-slate-900'" class="text-lg font-bold">
+              Account Profile
+            </h2>
+            <p class="text-xs text-slate-400 mt-0.5 font-normal">
+              Update your public profile photo and account details.
+            </p>
+          </div>
+
+          <!-- Photo Banners -->
+          <div *ngIf="photoSuccess" class="p-3 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs flex items-center gap-2">
+            <i class="fa-solid fa-circle-check"></i>
+            <span>{{ photoSuccess }}</span>
+          </div>
+          <div *ngIf="photoError" class="p-3 rounded-xl bg-red-500/10 border border-red-500/30 text-red-400 text-xs flex items-center justify-between gap-2">
+            <div class="flex items-center gap-2">
+              <i class="fa-solid fa-circle-exclamation"></i>
+              <span>{{ photoError }}</span>
+            </div>
+            <button (click)="photoError = ''"><i class="fa-solid fa-xmark"></i></button>
+          </div>
+
+          <!-- Photo Upload Block -->
+          <div class="flex items-center gap-5 p-4 rounded-2xl border" [ngClass]="themeService.isDarkMode() ? 'bg-[#151228] border-white/10' : 'bg-slate-50 border-slate-200'">
+            <div class="relative group cursor-pointer" (click)="photoInput.click()">
+              <img
+                [src]="socialService.currentUser().avatar"
+                alt="Avatar"
+                class="w-20 h-20 rounded-full object-cover border-2 border-purple-500/40"
+              />
+              <div class="absolute inset-0 rounded-full bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                <i class="fa-solid fa-camera text-white"></i>
+              </div>
+              <div *ngIf="isUploadingPhoto" class="absolute inset-0 rounded-full bg-black/60 text-white flex items-center justify-center">
+                <i class="fa-solid fa-spinner fa-spin text-lg"></i>
+              </div>
+            </div>
+
+            <div>
+              <h3 [ngClass]="themeService.isDarkMode() ? 'text-slate-100' : 'text-slate-900'" class="text-sm font-bold">
+                Profile Photo
+              </h3>
+              <p class="text-xs text-slate-400 mt-0.5">JPG, PNG or GIF up to 5MB.</p>
+              <button
+                type="button"
+                (click)="photoInput.click()"
+                [disabled]="isUploadingPhoto"
+                class="mt-2 px-3.5 py-1.5 bg-purple-600 hover:bg-purple-500 text-white text-xs font-semibold rounded-xl shadow-sm transition cursor-pointer flex items-center gap-2"
+              >
+                <i class="fa-solid fa-upload text-xs"></i>
+                <span>{{ isUploadingPhoto ? 'Uploading...' : 'Upload New Photo' }}</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Read-only Details Grid -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
+            <div class="p-4 rounded-2xl border" [ngClass]="themeService.isDarkMode() ? 'bg-[#151228] border-white/10' : 'bg-slate-50 border-slate-200'">
+              <span class="block text-[11px] font-semibold text-slate-400">Full Name</span>
+              <span [ngClass]="themeService.isDarkMode() ? 'text-white' : 'text-slate-900'" class="text-sm font-bold mt-1 block">
+                {{ socialService.currentUser().name }}
+              </span>
+            </div>
+
+            <div class="p-4 rounded-2xl border" [ngClass]="themeService.isDarkMode() ? 'bg-[#151228] border-white/10' : 'bg-slate-50 border-slate-200'">
+              <span class="block text-[11px] font-semibold text-slate-400">Username</span>
+              <span [ngClass]="themeService.isDarkMode() ? 'text-white' : 'text-slate-900'" class="text-sm font-bold mt-1 block">
+                {{ socialService.currentUser().username }}
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB 2: SECURITY & PASSWORD -->
+        <div *ngIf="activeTab === 'security'" class="space-y-6 animate-fade-in">
+          <div>
+            <h2 [ngClass]="themeService.isDarkMode() ? 'text-white' : 'text-slate-900'" class="text-lg font-bold">
+              Security & Password
+            </h2>
+            <p class="text-xs text-slate-400 mt-0.5 font-normal">
+              Change your account password directly on Route Posts servers.
+            </p>
+          </div>
+
+          <!-- Password Alert Banners -->
+          <div *ngIf="passwordSuccess" class="p-3.5 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs sm:text-sm flex items-center gap-2">
+            <i class="fa-solid fa-circle-check text-base"></i>
+            <span>{{ passwordSuccess }}</span>
+          </div>
+
+          <div *ngIf="passwordError" class="p-3.5 rounded-xl bg-red-500/10 border border-red-500/30 text-red-400 text-xs sm:text-sm flex items-center justify-between gap-2">
+            <div class="flex items-center gap-2.5">
+              <i class="fa-solid fa-circle-exclamation text-base shrink-0"></i>
+              <span>{{ passwordError }}</span>
+            </div>
+            <button (click)="passwordError = ''" class="text-red-400 p-1"><i class="fa-solid fa-xmark text-sm"></i></button>
+          </div>
+
+          <!-- Change Password Form -->
+          <form [formGroup]="passwordForm" (ngSubmit)="onChangePasswordSubmit()" class="space-y-4">
+            <!-- Current Password -->
+            <div
+              [ngClass]="themeService.isDarkMode() ? 'bg-[#151228] border-white/10' : 'bg-slate-50 border-slate-200'"
+              class="border rounded-xl px-4 py-2.5 transition-all group"
+            >
+              <label class="block text-[11px] font-semibold text-slate-400 mb-1">Current Password</label>
+              <div class="flex items-center justify-between gap-3">
+                <input
+                  [type]="showCurrentPassword ? 'text' : 'password'"
+                  formControlName="currentPassword"
+                  placeholder="Enter current password"
+                  [ngClass]="themeService.isDarkMode() ? 'text-white' : 'text-slate-800'"
+                  class="w-full bg-transparent border-none text-sm focus:outline-none p-0 font-medium"
+                />
+                <button type="button" (click)="showCurrentPassword = !showCurrentPassword" class="text-slate-400 hover:text-slate-200">
+                  <i [class]="showCurrentPassword ? 'fa-regular fa-eye-slash text-xs' : 'fa-regular fa-eye text-xs'"></i>
+                </button>
+              </div>
+            </div>
+
+            <!-- New Password -->
+            <div
+              [ngClass]="themeService.isDarkMode() ? 'bg-[#151228] border-white/10' : 'bg-slate-50 border-slate-200'"
+              class="border rounded-xl px-4 py-2.5 transition-all group"
+            >
+              <label class="block text-[11px] font-semibold text-slate-400 mb-1">New Password</label>
+              <div class="flex items-center justify-between gap-3">
+                <input
+                  [type]="showNewPassword ? 'text' : 'password'"
+                  formControlName="newPassword"
+                  placeholder="Enter new password (e.g. Password123!)"
+                  [ngClass]="themeService.isDarkMode() ? 'text-white' : 'text-slate-800'"
+                  class="w-full bg-transparent border-none text-sm focus:outline-none p-0 font-medium"
+                />
+                <button type="button" (click)="showNewPassword = !showNewPassword" class="text-slate-400 hover:text-slate-200">
+                  <i [class]="showNewPassword ? 'fa-regular fa-eye-slash text-xs' : 'fa-regular fa-eye text-xs'"></i>
+                </button>
+              </div>
+            </div>
+
+            <!-- Confirm New Password -->
+            <div
+              [ngClass]="themeService.isDarkMode() ? 'bg-[#151228] border-white/10' : 'bg-slate-50 border-slate-200'"
+              class="border rounded-xl px-4 py-2.5 transition-all group"
+            >
+              <label class="block text-[11px] font-semibold text-slate-400 mb-1">Confirm New Password</label>
+              <div class="flex items-center justify-between gap-3">
+                <input
+                  [type]="showConfirmPassword ? 'text' : 'password'"
+                  formControlName="confirmNewPassword"
+                  placeholder="Confirm new password"
+                  [ngClass]="themeService.isDarkMode() ? 'text-white' : 'text-slate-800'"
+                  class="w-full bg-transparent border-none text-sm focus:outline-none p-0 font-medium"
+                />
+                <button type="button" (click)="showConfirmPassword = !showConfirmPassword" class="text-slate-400 hover:text-slate-200">
+                  <i [class]="showConfirmPassword ? 'fa-regular fa-eye-slash text-xs' : 'fa-regular fa-eye text-xs'"></i>
+                </button>
+              </div>
+            </div>
+
+            <button
+              type="submit"
+              [disabled]="isSubmittingPassword"
+              class="px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 text-white font-semibold text-xs rounded-xl shadow-lg shadow-purple-600/30 transition-all cursor-pointer flex items-center justify-center gap-2"
+            >
+              <span>{{ isSubmittingPassword ? 'Updating Password...' : 'Update Password' }}</span>
+            </button>
+          </form>
+        </div>
+
+        <!-- TAB 3: APPEARANCE -->
+        <div *ngIf="activeTab === 'appearance'" class="space-y-6 animate-fade-in">
+          <div>
+            <h2 [ngClass]="themeService.isDarkMode() ? 'text-white' : 'text-slate-900'" class="text-lg font-bold">
+              Appearance & Theme
+            </h2>
+            <p class="text-xs text-slate-400 mt-0.5 font-normal">
+              Customize how Route Posts looks on your display.
+            </p>
+          </div>
+
+          <div class="p-5 rounded-2xl border flex items-center justify-between" [ngClass]="themeService.isDarkMode() ? 'bg-[#151228] border-white/10' : 'bg-slate-50 border-slate-200'">
+            <div class="flex items-center gap-3">
+              <i [class]="themeService.isDarkMode() ? 'fa-solid fa-moon text-purple-400 text-xl' : 'fa-solid fa-sun text-amber-500 text-xl'"></i>
+              <div>
+                <h3 [ngClass]="themeService.isDarkMode() ? 'text-white' : 'text-slate-900'" class="text-sm font-bold">
+                  {{ themeService.isDarkMode() ? 'Dark Mode' : 'Light Mode' }}
+                </h3>
+                <p class="text-xs text-slate-400 mt-0.5">Toggle between dark cosmic aesthetic and clean light mode.</p>
+              </div>
+            </div>
+
+            <button
+              (click)="toggleDarkMode()"
+              class="px-4 py-2 rounded-xl bg-purple-600 text-white text-xs font-semibold hover:bg-purple-500 transition cursor-pointer"
+            >
+              Switch Theme
+            </button>
+          </div>
+        </div>
+
+        <!-- TAB 4: NOTIFICATIONS -->
+        <div *ngIf="activeTab === 'notifications'" class="space-y-6 animate-fade-in">
+          <div>
+            <h2 [ngClass]="themeService.isDarkMode() ? 'text-white' : 'text-slate-900'" class="text-lg font-bold">
+              Notification Preferences
+            </h2>
+            <p class="text-xs text-slate-400 mt-0.5 font-normal">
+              Manage your alert channels and notification triggers.
+            </p>
+          </div>
+
+          <div class="space-y-3">
+            <div class="p-4 rounded-2xl border flex items-center justify-between" [ngClass]="themeService.isDarkMode() ? 'bg-[#151228] border-white/10' : 'bg-slate-50 border-slate-200'">
+              <div>
+                <h3 [ngClass]="themeService.isDarkMode() ? 'text-white' : 'text-slate-900'" class="text-sm font-bold">Push Notifications</h3>
+                <p class="text-xs text-slate-400">Receive alerts when someone likes or comments on your posts.</p>
+              </div>
+              <input type="checkbox" checked class="w-4 h-4 text-purple-600 rounded cursor-pointer" />
+            </div>
+
+            <div class="p-4 rounded-2xl border flex items-center justify-between" [ngClass]="themeService.isDarkMode() ? 'bg-[#151228] border-white/10' : 'bg-slate-50 border-slate-200'">
+              <div>
+                <h3 [ngClass]="themeService.isDarkMode() ? 'text-white' : 'text-slate-900'" class="text-sm font-bold">Email Digest</h3>
+                <p class="text-xs text-slate-400">Receive weekly trending posts and community highlights.</p>
+              </div>
+              <input type="checkbox" checked class="w-4 h-4 text-purple-600 rounded cursor-pointer" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
